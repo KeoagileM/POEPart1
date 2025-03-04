@@ -13,6 +13,7 @@ namespace POEPart1
             new VoiceMessage() { };
             new ImageAscii() { };
             new GreetingInteraction() { };
+            
         }
     }
 }
