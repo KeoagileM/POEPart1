@@ -32,7 +32,7 @@ namespace POEPart1
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Greetings " + name + ", how can I help you today?");//Greets the user with the name
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("User: --> ");
+            Console.WriteLine("User: --> "); 
         }
     }
 }
