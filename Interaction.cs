@@ -3,16 +3,19 @@ using System.Net.NetworkInformation;
 
 namespace POEPart1
 {
-    public class GreetingInteraction
+    public class Interaction
     {
         //Declaring the name
         public string name = "";
 
         //Information about cybersecurity and the responses of the chatbox
-        public string[] facts = { "Im good thank you :)",
+        public string[] facts = { //The response when the user asks how are you
+                                  "Im good thank you :)",
 
+                                  //The response for what the chatbox can do for you
                                   "To teach you about cybersecurity best practices, phishing scams, password managements and general online safety",
 
+                                  //The response of asking about strong passwords
                                   "You can ask me about how you can create strong passwords, about password safety, What is phishing and how to recognize a phishing email, and what is a two-factor authentication",
 
                                   //This is the response for creating a Strong password
@@ -21,17 +24,21 @@ namespace POEPart1
                                   "\n3) Avoid common words and patterns like your name and birthday" +
                                   "\n4) Enable a two-factor authentication",
 
+                                  //This is the response of safety of the password
                                   "Password safety is the practice of creating, managing, and protecting your password to prevent unauthorized access to your accounts and sensitive data or information",
+                                  
+                                  //Response asking about phishing
                                   "Phishing is a cyberattack where scammers try to trick you into revealing sensitive information such as passwords and personal data, you can recognise them by them:" +
                                   "\n1) Creating a sense of emergency in their mails like, 'YOU HAVE WON A PRICE, CLICK HERE TO CLAIM'" +
                                   "\n2) They do not address you by your name, the say 'Dear customer' instead of saying greetings " +
                                   "\n3) They create links, to avoid this, you should hover through links without clicking",
 
+                                  //The two factor authentication response
                                   "Two-factor authentication is an extra layer of security for your online accounts. it requires two tipes of verification which is *What you know(Password)* and *What you have(Phone, email, authenticator app)* "};
-        public GreetingInteraction()
+        
+        // This is the constructor
+        public Interaction()
         {
-            
-            
             //Callling the method
             userInteractions(name);
         }
@@ -100,7 +107,7 @@ namespace POEPart1
                 }
 
                 //When user asks about password safety
-                else if (response.Contains("password safety"))
+                else if (response.Contains("password safety") || response.Contains("password"))
                 {
                     Console.WriteLine("ChatBot: --> " + facts[4], Console.ForegroundColor = ConsoleColor.Green);
 
@@ -132,7 +139,7 @@ namespace POEPart1
                     Console.ForegroundColor = ConsoleColor.White;
                     continue;
                 }
-            } while (!response.Contains("How are you") || !response.Contains("purpose") || !response.Contains("ask") || !response.Contains("strong password") || response.Contains("password safety") || response.Contains("phishing") || response.Contains("two factor authentication"));
+            } while (!response.Contains("How are you") || !response.Contains("purpose") || !response.Contains("ask") || !response.Contains("strong password") || !response.Contains("password") || response.Contains("password safety") || response.Contains("phishing") || response.Contains("two factor authentication"));
         }
     }
 }
