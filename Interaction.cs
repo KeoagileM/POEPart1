@@ -1,49 +1,57 @@
 ﻿using System;
+using System.Collections;
 using System.Net.NetworkInformation;
 
 namespace POEPart1
 {
     public class Interaction
     {
-        //Declaring the name
-        public string name = "";
-
-        //Information about cybersecurity and the responses of the chatbox
-        public string[] facts = { //The response when the user asks how are you
-                                  "Im good thank you :)",
-
-                                  //The response for what the chatbox can do for you
-                                  "To teach you about cybersecurity best practices, phishing scams, password managements and general online safety",
-
-                                  //The response of asking about strong passwords
-                                  "You can ask me about how you can create strong passwords, about password safety, What is phishing and how to recognize a phishing email, and what is a two-factor authentication",
-
-                                  //This is the response for creating a Strong password
-                                  "1)Create a long password" +
-                                  "\n2) Mix differents character types like using an uppercase, lowercase, numbers, and special characters" +
-                                  "\n3) Avoid common words and patterns like your name and birthday" +
-                                  "\n4) Enable a two-factor authentication",
-
-                                  //This is the response of safety of the password
-                                  "Password safety is the practice of creating, managing, and protecting your password to prevent unauthorized access to your accounts and sensitive data or information",
-                                  
-                                  //Response asking about phishing
-                                  "Phishing is a cyberattack where scammers try to trick you into revealing sensitive information such as passwords and personal data, you can recognise them by them:" +
-                                  "\n1) Creating a sense of emergency in their mails like, 'YOU HAVE WON A PRICE, CLICK HERE TO CLAIM'" +
-                                  "\n2) They do not address you by your name, the say 'Dear customer' instead of saying greetings " +
-                                  "\n3) They create links, to avoid this, you should hover through links without clicking",
-
-                                  //The two factor authentication response
-                                  "Two-factor authentication is an extra layer of security for your online accounts. it requires two tipes of verification which is *What you know(Password)* and *What you have(Phone, email, authenticator app)* "};
         
-        // This is the constructor
         public Interaction()
         {
+            //ArrayList for the facts
+            ArrayList facts = new ArrayList();
+
+            //ArrayList about ignoring the words
+            ArrayList ignoreWords = new ArrayList();
+
+            //Calling the getfacts method
+            getFacts(facts);
+
+            //Calling the ignore letters method
+            ignoreLetters(ignoreWords);
+
+            string name = "";
             //Callling the method
-            userInteractions(name);
+            userInteractions(name, facts, ignoreWords);
         }
 
-        private void userInteractions(string name)
+        //Method for getting the facts
+        public void getFacts(ArrayList facts)
+        {
+            facts.Add("Im good thank you :)");
+            facts.Add("To teach you about cyber security best practices");
+            facts.Add("You can ask me about how you can create Strong passwords, about Password's safety, What is Phishing and how to recognize a Phishing email, and what is a two factor authentication");
+            facts.Add("1)To create strong passwords you must: 1) Create long passwords, 2) Mix differents character types like using an uppercase, lowercase, numbers, and special characters\"");
+            facts.Add("password safety is the practice of creating, managing, and protecting your password to prevent unauthorized access to your accounts and sensitive data or information");
+            facts.Add("phishing is a cyberattack where scammers try to trick you into revealing sensitive information such as personal data, you can recognise them by emails that have a sense of emergency like, 'YOU HAVE WON A PRICE, CLICK HERE TO CLAIM'");
+            facts.Add("two-factor authentication is an extra layer of security for your online accounts. it requires two tipes of verification which is *What you know(Password)* and *What you have(Phone, email, authenticator app)* ");
+            facts.Add("A password is a secret word or phrase that must be used to gain admission to a place.");
+            facts.Add("cybersecurity is the practice of protecting systems, networks, and programs from digital attacks");
+            
+        }
+
+        //Methid for ignoring unnecesssary words
+        private void ignoreLetters(ArrayList ignoreLetters)
+        {
+            ignoreLetters.Add("what");
+            ignoreLetters.Add("is");
+            ignoreLetters.Add("tell");
+            ignoreLetters.Add("me");
+            ignoreLetters.Add("about");
+        }
+        
+        private void userInteractions(string name, ArrayList facts, ArrayList ignoreWords)
         {
             //Welvomes the user
             Console.WriteLine("ChatBot: --> Welcome to the Cybersecurity Awareness, Please enter your name ", Console.ForegroundColor = ConsoleColor.Blue);//Displays the message and makes the message blue
@@ -65,6 +73,8 @@ namespace POEPart1
             Console.WriteLine("Greetings " + name );//Greets the user with the name
             //Do while loop to repeat until its told to stop
             string response = "";
+            //Boolean to find the correct answers
+            Boolean found = false;
             do
             {
             //Making the colour of the text blue
@@ -76,70 +86,51 @@ namespace POEPart1
             //Asks the user to ask anything about cybersecurity
              response = Console.ReadLine();
 
-                //This will tell the user about password safety
-                if (response.Contains("how are you"))
-                {
+                //For making the responses lowercase
+                response = response.ToLower();
 
-                    Console.WriteLine("ChatBot: --> " + facts[0], Console.ForegroundColor = ConsoleColor.Green);
-                    
+                //Using the split to seperate the sentaces
+                string[] storeWords = response.Split(' ');
+                ArrayList filter = new ArrayList();
+
+                //For loop to store the users sentences
+                for(int i = 0; i < storeWords.Length; i++)
+                {
+                    if (!ignoreWords.Contains(storeWords[i])) ;
+                    filter.Add(storeWords[i]);
                 }
 
-                //When the user asks what is the purpose of the chatbox
-                else if (response.Contains("purpose"))
-                {
-                    Console.WriteLine("ChatBot: --> " + facts[1], Console.ForegroundColor = ConsoleColor.Green);
-                    
                 
-                }
+                String message = "";
 
-                //When the user asks what he/she can ask in the chatbox
-                else if (response.Contains("ask"))
+                //Disp;aying the answers
+                for(int i = 0; i < filter.Count; i++)
                 {
-                    Console.WriteLine("ChatBot: --> " + facts[2], Console.ForegroundColor = ConsoleColor.Green);
-                    
+                    //Nested for loop to display
+                    for (int j = 0; j < facts.Count; j++)
+                    {
+                        if (facts[j].ToString().Contains(filter[i].ToString()))
+                        {
+                            found = true;
+                            message += facts[j] + "\n"; 
+                        }
+                    }
                 }
 
-                //When user asks about a strong password
-                else if (response.Contains("strong password"))
+                //If statement to display everything
+                if (found)
                 {
-                    Console.WriteLine("ChatBot: --> " + facts[3], Console.ForegroundColor = ConsoleColor.Green);
-
-                }
-
-                //When user asks about password safety
-                else if (response.Contains("password safety") || response.Contains("password"))
+                    Console.WriteLine(message);
+                }else if (response.Contains("exit"))
                 {
-                    Console.WriteLine("ChatBot: --> " + facts[4], Console.ForegroundColor = ConsoleColor.Green);
-
+                    Console.WriteLine("Thank you for using our chatbox", Console.ForegroundColor = ConsoleColor.Green);
+                    break;
                 }
-
-                //When user asks about phishing
-                else if (response.Contains("phishing"))
-                {
-                    Console.WriteLine("ChatBot: --> " + facts[5] + " " + name, Console.ForegroundColor = ConsoleColor.Green);
-
-                }
-
-                //When the user types something about 2 factor authentication
-                else if (response.Contains("two factor authentication"))
-                {
-                    Console.WriteLine("ChatBot: --> " + facts[6], Console.ForegroundColor = ConsoleColor.Green);
-
-                }
-                //This will exit if the user types exit
-                else if(response.Contains("exit")){
-                    Console.WriteLine("ChatBot: --> Thank you for using our chatbox :)", Console.ForegroundColor = ConsoleColor.Green);
-                    break;//Break is for exiting the program
-                }
-
-                //If the user enters anything else it will ask the user to enter the correct questions that are related to cyber security
                 else
                 {
-                    Console.WriteLine("ChatBot: --> I didn't quite understand that. Could you rephrase? ", Console.ForegroundColor = ConsoleColor.DarkRed);
-                    Console.ForegroundColor = ConsoleColor.White;
-                    continue;
+                    Console.WriteLine("Please write something related to cybersecurity");
                 }
-            } while (!response.Contains("How are you") || !response.Contains("purpose") || !response.Contains("ask") || !response.Contains("strong password") || !response.Contains("password") || response.Contains("password safety") || response.Contains("phishing") || response.Contains("two factor authentication"));
+            } while (!response.Contains("exit") || found || !found);
         }
     }
 }

@@ -9,7 +9,6 @@ namespace POEPart1
         {
             //Calling the method of playing voice message
             playVoiceMessage("VoiceMessage.wav");
-            Console.WriteLine("Welcome to the topics of Cyber Security");
         }
 
         //Method of playing the voice message
