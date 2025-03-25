@@ -7,8 +7,16 @@ namespace POEPart1
     {
         public VoiceMessage()
         {
-            //Calling the method of playing voice message
-            playVoiceMessage("VoiceMessage.wav");
+            try
+            {
+                //Calling the method of playing voice message
+                playVoiceMessage("WelcomeMessage.wav");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         //Method of playing the voice message
