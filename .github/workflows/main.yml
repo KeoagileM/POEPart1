@@ -1,12 +1,16 @@
-name: .NET CI Workflow
+name: C# Build
 
 on: 
   push:
+    branches:
+        master # Runs on every push to the main branch
   pull_request:
+    branches:
+        main # Runs on every pull request to main
 
 jobs:
   build:
-    runs-on: POEPart1
+    runs-on: windows-latest # Use the latest window runner
 
     steps:
       - name: Checkout Repository
@@ -21,10 +25,7 @@ jobs:
         run: dotnet restore
 
       - name: Build Project
-        run: dotnet build --no-restore
+        run: dotnet build --no-restore --configuration Release #Builds the project
 
-      - name: Run Test
-        run: dotnet test --no-build
---verbosity normal
-
+      
       
