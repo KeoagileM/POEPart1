@@ -31,7 +31,7 @@ namespace POEPart1
             keyResponses.Add("purpose=To teach you about cyber security best practices");
             keyResponses.Add("ask=You can ask me about how you can create Strong passwords, about Password's safety, What is Phishing and how to recognize a Phishing email, and what is a two factor authentication");
             keyResponses.Add("strong password=1)To create strong passwords you must: 1) Create long passwords, 2) Mix differents character types like using an uppercase, lowercase, numbers, and special characters");
-            keyResponses.Add("password safety=password safety is the practice of creating, managing, and protecting your password to prevent unauthorized access to your accounts and sensitive data or information");
+            keyResponses.Add("password safety=Password safety is the practice of creating, managing, and protecting your password to prevent unauthorized access to your accounts and sensitive data or information");
             keyResponses.Add("phishing=Phishing is a cyberattack where scammers try to trick you into revealing sensitive information such as personal data, you can recognise them by emails that have a sense of emergency like, 'YOU HAVE WON A PRICE, CLICK HERE TO CLAIM'");
             keyResponses.Add("two-factor authentication=Two-factor authentication is an extra layer of security for your online accounts. it requires two tipes of verification which is *What you know(Password)* and *What you have(Phone, email, authenticator app)* ");
             keyResponses.Add("password=A password is a secret word or phrase that must be used to gain admission to a place.");
@@ -70,65 +70,41 @@ namespace POEPart1
             //Do while loop to repeat until it is told to stop
             do
             {
-            //Making the colour of the text blue
-            typingEffect("Chatbot: --> How can I help you today?", Console.ForegroundColor = ConsoleColor.Blue);//Greets the user with the name
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write(name + ": --> ");
+                found = false;  // Reset found at the start
+                typingEffect("Chatbot: --> How can I help you today?", Console.ForegroundColor =ConsoleColor.Blue);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write(name + ": --> ");
+                response = Console.ReadLine().ToLower();
 
-            //Asks the user to ask anything about cybersecurity
-             response = Console.ReadLine();
-
-                //For making the responses lowercase
-                response = response.ToLower();
-
-                //Using the split to seperate the sentaces
-                
-                //Declaring the variable that is going to display the messages
                 String message = "";
-               
-                //For each loop to scan for the keywords in the arraylist
+
                 foreach (string messages in keyResponses)
                 {
-                    
-                    //Splitting using the equal operato
-                    string[]keyAndResponse = messages.Split('=');
-
-                    //The keyword is the first one in the array
+                    string[] keyAndResponse = messages.Split('=');
                     string keyWord = keyAndResponse[0];
 
-                    //if the response contains the keyword we can display
                     if (response.Contains(keyWord))
                     {
                         message += keyAndResponse[1] + "\n";
                         found = true;
-
                     }
-                    
                 }
 
-                //If statement to display everything
                 if (found)
                 {
                     typingEffect(message, Console.ForegroundColor = ConsoleColor.Green);
                 }
                 else if (response.Contains("exit"))
                 {
-
-                    //When exiting 
-                    typingEffect("Thank you for using our chatbox", Console.ForegroundColor = ConsoleColor.Green);
+                    typingEffect("Thank you for using our chatbot", Console.ForegroundColor = ConsoleColor.Green);
                     break;
-                }
-                else if (!found)
-                {
-                    typingEffect("Please write something related to cybersecurity", Console.ForegroundColor = ConsoleColor.DarkRed);
                 }
                 else
                 {
-                    //Displaying the error message
                     typingEffect("Please write something related to cybersecurity", Console.ForegroundColor = ConsoleColor.DarkRed);
-                    
                 }
-            } while (!response.Contains("exit"));
+            } while (true);  // Ensure continuous interaction
+
         }
 
         //Method for typing effect
