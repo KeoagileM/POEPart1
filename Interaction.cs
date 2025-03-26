@@ -106,7 +106,7 @@ namespace POEPart1
             } while (true);  // Ensure continuous interaction
 
         }
-
+         
         //Method for typing effect
         private void typingEffect(string message, ConsoleColor color, int speed = 25)
         {
