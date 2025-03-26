@@ -36,13 +36,15 @@ namespace POEPart1
             keyResponses.Add("two-factor authentication=Two-factor authentication is an extra layer of security for your online accounts. it requires two tipes of verification which is *What you know(Password)* and *What you have(Phone, email, authenticator app)* ");
             keyResponses.Add("password=A password is a secret word or phrase that must be used to gain admission to a place.");
             keyResponses.Add("cybersecurity=Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks");
-            
+            keyResponses.Add("cyberattack=An attempt to disrupt, damage, or gain unauthorized access to computer systems, network, or data");
+            keyResponses.Add("antivirus=Antivirus is a software that scans a device or a network to detect security threats, alert you, and neutralize malicious code.");
+            keyResponses.Add("ip=An IP address is a numeric label assigned to devices that use the internet to communicate, so you should be careful when sharing your IP address");
         }
-        
+
         //Method for user interactions
         private void userInteractions(string name, ArrayList keyResponses)
         {
-            
+
             typingEffect("ChatBot: -->  Please enter your name ", Console.ForegroundColor = ConsoleColor.Blue);//Displays the message and makes the message blue
             Console.ForegroundColor = ConsoleColor.White;
             //Promts the user and the user enters the values
@@ -51,13 +53,47 @@ namespace POEPart1
 
             while (string.IsNullOrEmpty(name))//Makes sure that the user enters a name
             {
-                
+
                 typingEffect("Chatbot: --> Please make sure that you put your name, dont leave it empty", Console.ForegroundColor = ConsoleColor.DarkRed);
                 Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("User: --> ");
                 name = Console.ReadLine();
-                
+
             }
 
+            String userFeeling;
+            
+
+            do
+            {
+                //To check how the user feels 
+                typingEffect("ChatBot: -->  Are you feeling good today ", Console.ForegroundColor = ConsoleColor.Blue);//Displays the message and makes the message blue
+                Console.ForegroundColor = ConsoleColor.White;
+                //Promts the user and the user enters the values
+                Console.Write(name + ": --> ");
+                userFeeling = Console.ReadLine().ToLower();
+
+                
+                //If the user enters yes
+                if (userFeeling.Contains("yes"))
+                {
+                    typingEffect("Chatbot: --> That sounds great " + name, Console.ForegroundColor = ConsoleColor.Green);
+                }
+
+                //If the user enters no
+                else if (userFeeling.Contains("no"))
+                {
+                    typingEffect("Chatbot: --> Sorry to hear that, Remember tough times never last " + name, Console.ForegroundColor = ConsoleColor.Green);
+                }
+                else
+                {
+                typingEffect("Chatbot: --> Please answer with a yes or a no " + name, Console.ForegroundColor = ConsoleColor.DarkRed);
+                }
+            }
+            while (!userFeeling.Contains("yes") || !userFeeling.Contains("no")) ;
+            
+                
+            
             //Greets the user with the name
             typingEffect("Chatbot: --> Greetings " + name, Console.ForegroundColor = ConsoleColor.Green);
 
@@ -101,7 +137,7 @@ namespace POEPart1
                 }
                 else
                 {
-                    typingEffect("Please write something related to cybersecurity", Console.ForegroundColor = ConsoleColor.DarkRed);
+                    typingEffect("I could not understand that, I am only designed to answer about cybersecurity", Console.ForegroundColor = ConsoleColor.DarkRed);
                 }
             } while (true);  // Ensure continuous interaction
 
