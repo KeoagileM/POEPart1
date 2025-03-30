@@ -93,7 +93,7 @@ namespace POEPart1
             while (!userFeeling.Contains("yes") || !userFeeling.Contains("no")) ;
             
                 
-            
+             
             //Greets the user with the name
             typingEffect("Chatbot: --> Greetings " + name, Console.ForegroundColor = ConsoleColor.Green);
 
