@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Text.RegularExpressions;
 
 namespace POEPart1
 {
@@ -39,17 +40,24 @@ namespace POEPart1
             keyResponses.Add("cyberattack=An attempt to disrupt, damage, or gain unauthorized access to computer systems, network, or data");
             keyResponses.Add("antivirus=Antivirus is a software that scans a device or a network to detect security threats, alert you, and neutralize malicious code.");
             keyResponses.Add("ip=An IP address is a numeric label assigned to devices that use the internet to communicate, so you should be careful when sharing your IP address");
+            //safebrowsing
+            //malware
+            //privacy
+            //sql injection
+            //data breach
+            //Social engineering
         }
 
         //Method for user interactions
         private void userInteractions(string name, ArrayList keyResponses)
         {
-
+            
             typingEffect("ChatBot: -->  Please enter your name ", Console.ForegroundColor = ConsoleColor.Blue);//Displays the message and makes the message blue
             Console.ForegroundColor = ConsoleColor.White;
             //Promts the user and the user enters the values
             Console.Write("User: --> ");
             name = Console.ReadLine();
+
 
             while (string.IsNullOrEmpty(name))//Makes sure that the user enters a name
             {
@@ -62,7 +70,9 @@ namespace POEPart1
             }
 
             String userFeeling;
-            
+
+            //Greets the user with the name
+            typingEffect("Chatbot: --> Greetings " + name, Console.ForegroundColor = ConsoleColor.Green);
 
             do
             {
@@ -73,17 +83,19 @@ namespace POEPart1
                 Console.Write(name + ": --> ");
                 userFeeling = Console.ReadLine().ToLower();
 
-                
+
                 //If the user enters yes
                 if (userFeeling.Contains("yes"))
                 {
                     typingEffect("Chatbot: --> That sounds great " + name, Console.ForegroundColor = ConsoleColor.Green);
+                    break;
                 }
 
                 //If the user enters no
                 else if (userFeeling.Contains("no"))
                 {
                     typingEffect("Chatbot: --> Sorry to hear that, Remember tough times never last " + name, Console.ForegroundColor = ConsoleColor.Green);
+                    break;
                 }
                 else
                 {
@@ -92,10 +104,7 @@ namespace POEPart1
             }
             while (!userFeeling.Contains("yes") || !userFeeling.Contains("no")) ;
             
-                
-             
-            //Greets the user with the name
-            typingEffect("Chatbot: --> Greetings " + name, Console.ForegroundColor = ConsoleColor.Green);
+            
 
             //The responses of the user
             string response = "";
