@@ -30,7 +30,7 @@ namespace POEPart1
         {
             keyResponses.Add("how are you=Im good thank you :)");
             keyResponses.Add("purpose=To teach you about cyber security best practices");
-            keyResponses.Add("ask=You can ask me about how you can create Strong passwords, about Password's safety, What is Phishing and how to recognize a Phishing email, and what is a two factor authentication");
+            keyResponses.Add("ask=You can ask me about how you can create Strong passwords, what is a password, about Password's safety, What is Phishing and how to recognize a Phishing email, two factor authentication,cybersecurity, cyberattacks, antiviruses, and alot more ");
             keyResponses.Add("strong password=1)To create strong passwords you must: 1) Create long passwords, 2) Mix differents character types like using an uppercase, lowercase, numbers, and special characters");
             keyResponses.Add("password safety=Password safety is the practice of creating, managing, and protecting your password to prevent unauthorized access to your accounts and sensitive data or information");
             keyResponses.Add("phishing=Phishing is a cyberattack where scammers try to trick you into revealing sensitive information such as personal data, you can recognise them by emails that have a sense of emergency like, 'YOU HAVE WON A PRICE, CLICK HERE TO CLAIM'");
@@ -59,7 +59,7 @@ namespace POEPart1
             while (string.IsNullOrEmpty(name) || !Regex.IsMatch(name, @"^[A-Za-z]+$"))//Makes sure that the user enters a name
             {
 
-                typingEffect("Chatbot: --> Please make sure that you put your name, dont leave it empty", Console.ForegroundColor = ConsoleColor.DarkRed);
+                typingEffect("Chatbot: --> Please make sure that you put your name, dont leave it empty and must contain only letters, not numbers or special characters", Console.ForegroundColor = ConsoleColor.DarkRed);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("User: --> ");
                 name = Console.ReadLine();
@@ -74,7 +74,7 @@ namespace POEPart1
             do
             {
                 //To check how the user feels 
-                typingEffect("ChatBot: -->  Are you feeling good today ", Console.ForegroundColor = ConsoleColor.Blue);//Displays the message and makes the message blue
+                typingEffect("ChatBot: -->  Are you feeling good today? ", Console.ForegroundColor = ConsoleColor.Blue);//Displays the message and makes the message blue
                 Console.ForegroundColor = ConsoleColor.White;
                 //Promts the user and the user enters the values
                 Console.Write(name + ": --> ");
@@ -96,6 +96,7 @@ namespace POEPart1
                 }
                 else
                 {
+                    //When the user enters the answer that is yes or no
                 typingEffect("Chatbot: --> Please answer with a yes or a no " + name, Console.ForegroundColor = ConsoleColor.DarkRed);
                 }
             }
@@ -112,12 +113,13 @@ namespace POEPart1
             //Do while loop to repeat until it is told to stop
             do
             {
-                found = false;  // Reset found at the start
+                found = false;  // Reset found as false at the start
                 typingEffect("Chatbot: --> How can I help you today?", Console.ForegroundColor =ConsoleColor.Blue);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write(name + ": --> ");
                 response = Console.ReadLine().ToLower();
 
+                //Message for the responses
                 String message = "";
 
                 foreach (string messages in keyResponses)
@@ -127,6 +129,7 @@ namespace POEPart1
 
                     if (response.Contains(keyWord))
                     {
+                        //Message will be equal to the response
                         message += keyAndResponse[1] + "\n";
                         found = true;
                     }
@@ -134,18 +137,21 @@ namespace POEPart1
 
                 if (found)
                 {
+                    //Displaying the fact
                     typingEffect(message, Console.ForegroundColor = ConsoleColor.Green);
                 }
                 else if (response.Contains("exit"))
                 {
+                    //When the user exits
                     typingEffect("Thank you for using our chatbot", Console.ForegroundColor = ConsoleColor.Green);
                     break;
                 }
                 else
                 {
+                    //If the user does not enter anything related to cybersecurity
                     typingEffect("I could not understand that, I am only designed to answer about cybersecurity", Console.ForegroundColor = ConsoleColor.DarkRed);
                 }
-            } while (true);  // Ensure continuous interaction
+            } while (true);  
 
         }
          
