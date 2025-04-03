@@ -56,8 +56,7 @@ namespace POEPart1
             Console.Write("User: --> ");
             name = Console.ReadLine();
 
-
-            while (string.IsNullOrEmpty(name) || !Regex.IsMatch(name, "@^[a-zA-Z]+$"))//Makes sure that the user enters a name
+            while (string.IsNullOrEmpty(name) || !Regex.IsMatch(name, @"^[A-Za-z]+$"))//Makes sure that the user enters a name
             {
 
                 typingEffect("Chatbot: --> Please make sure that you put your name, dont leave it empty", Console.ForegroundColor = ConsoleColor.DarkRed);

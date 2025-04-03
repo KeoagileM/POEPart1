@@ -22,7 +22,7 @@ namespace POEPart1
                 Console.WriteLine(full_path);
                 //then start working on the ascii
                 Bitmap Logo = new Bitmap(full_path);
-                Logo = new Bitmap(Logo, new Size(150, 70));
+                Logo = new Bitmap(Logo, new Size(150, 50));
 
                 for (int height = 0; height < Logo.Height; height++)
                 {
@@ -32,7 +32,9 @@ namespace POEPart1
                         Color pixelColor = Logo.GetPixel(width, height);
                         int gray = (pixelColor.G + pixelColor.G + pixelColor.G) / 3;
                         char asciiChar = gray > 200 ? '.' : gray > 150 ? '*' : gray > 100 ? 'o' : gray > 50 ? '#' : '@';
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write(asciiChar);
+                    Console.ResetColor();
 
                     }
                     Console.WriteLine();
