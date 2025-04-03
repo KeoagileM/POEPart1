@@ -40,12 +40,10 @@ namespace POEPart1
             keyResponses.Add("cyberattack=An attempt to disrupt, damage, or gain unauthorized access to computer systems, network, or data");
             keyResponses.Add("antivirus=Antivirus is a software that scans a device or a network to detect security threats, alert you, and neutralize malicious code.");
             keyResponses.Add("ip=An IP address is a numeric label assigned to devices that use the internet to communicate, so you should be careful when sharing your IP address");
-            //safebrowsing
-            //malware
-            //privacy
-            //sql injection
-            //data breach
-            //Social engineering
+            keyResponses.Add("browsing=Safe Browsing is installing a software that checks websites before opening them for you");
+            keyResponses.Add("malware=software that is specifically designed to disrupt, damage, or gain unauthorized access to a computer system.");
+            keyResponses.Add("privacy=a state in which one is not observed or disturbed by other people");
+            keyResponses.Add("social engineering=the tactic of manipulating, influencing, or deceiving a victim in order to gain control over a computer system, or to steal personal and financial information.");
         }
 
         //Method for user interactions
@@ -59,7 +57,7 @@ namespace POEPart1
             name = Console.ReadLine();
 
 
-            while (string.IsNullOrEmpty(name))//Makes sure that the user enters a name
+            while (string.IsNullOrEmpty(name) || !Regex.IsMatch(name, "@^[a-zA-Z]+$"))//Makes sure that the user enters a name
             {
 
                 typingEffect("Chatbot: --> Please make sure that you put your name, dont leave it empty", Console.ForegroundColor = ConsoleColor.DarkRed);
