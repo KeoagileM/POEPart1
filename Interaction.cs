@@ -14,43 +14,24 @@ namespace POEPart1
 
         //The favourite topic
         string favouriteTopic = "";
+        string feelingTopic = "";
 
         //The last topic
         string lastTopic = "";
         public Interaction()
         {
-            //ArrayList for the facts
-            ArrayList keyResponses = new ArrayList();
-
             //Calling the getfacts method
-            getFacts(keyResponses);
+            getFacts();
 
             string name = "";
             //Callling the method
-            userInteractions(name, keyResponses);
+            userInteractions(name);
         }
 
         //Method for getting the facts
-        public void getFacts(ArrayList keyResponses)
+        public void getFacts()
         {
-            /*
-            keyResponses.Add("how are you=Im good thank you :)");
-            keyResponses.Add("purpose=To teach you about cyber security best practices");
-            keyResponses.Add("ask=You can ask me about how you can create Strong passwords, what is a password, about Password's safety, What is Phishing and how to recognize a Phishing email, two factor authentication,cybersecurity, cyberattacks, antiviruses, and alot more ");
-            keyResponses.Add("strong password=1)To create strong passwords you must: 1) Create long passwords, 2) Mix differents character types like using an uppercase, lowercase, numbers, and special characters");
-            keyResponses.Add("password safety=Password safety is the practice of creating, managing, and protecting your password to prevent unauthorized access to your accounts and sensitive data or information");
-            keyResponses.Add("phishing=Phishing is a cyberattack where scammers try to trick you into revealing sensitive information such as personal data, you can recognise them by emails that have a sense of emergency like, 'YOU HAVE WON A PRICE, CLICK HERE TO CLAIM'");
-            keyResponses.Add("two-factor authentication=Two-factor authentication is an extra layer of security for your online accounts. it requires two tipes of verification which is *What you know(Password)* and *What you have(Phone, email, authenticator app)* ");
-            keyResponses.Add("password=A password is a secret word or phrase that must be used to gain admission to a place.");
-            keyResponses.Add("cybersecurity=Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks");
-            keyResponses.Add("cyberattack=An attempt to disrupt, damage, or gain unauthorized access to computer systems, network, or data");
-            keyResponses.Add("antivirus=Antivirus is a software that scans a device or a network to detect security threats, alert you, and neutralize malicious code.");
-            keyResponses.Add("ip=An IP address is a numeric label assigned to devices that use the internet to communicate, so you should be careful when sharing your IP address");
-            keyResponses.Add("browsing=Safe Browsing is installing a software that checks websites before opening them for you");
-            keyResponses.Add("malware=software that is specifically designed to disrupt, damage, or gain unauthorized access to a computer system.");
-            keyResponses.Add("privacy=a state in which one is not observed or disturbed by other people");
-            keyResponses.Add("social engineering=the tactic of manipulating, influencing, or deceiving a victim in order to gain control over a computer system, or to steal personal and financial information.");
-            */
+            
             topicResponses["how are you"] = new List<string>
             {
                 "Im good thank you"
@@ -63,7 +44,7 @@ namespace POEPart1
             {
                 "You can ask me about how you can create Strong passwords, what is a password, about Password's safety, What is Phishing and how to recognize a Phishing email, two factor authentication,cybersecurity, cyberattacks, antiviruses, and alot more."
             };
-            topicResponses["strong password"] = new List<string>
+            topicResponses["strong passwords"] = new List<string>
             {
                 "A strong password is difficult for others (including hackers) to figure out because it doesn’t use obvious information like names or birthdays.",
                 "It uses a combination of uppercase and lowercase letters, numbers, and symbols to make it more secure.",
@@ -87,7 +68,7 @@ namespace POEPart1
                 "You need to provide two things: something you know (like a password) and something you have (like a code sent to your phone or email).",
                 "2FA helps protect your accounts from cybercriminals by making it harder for them to log in, even if they steal your password."
             };
-            topicResponses["passwords"] = new List<string>
+            topicResponses["password"] = new List<string>
             {
                 "A secret code used to protect your account or device.",
                 "Your digital key that keeps your information safe from others.",
@@ -143,7 +124,7 @@ namespace POEPart1
             };
         }
         //Method for user interactions
-        private void userInteractions(string name, ArrayList keyResponses)
+        private void userInteractions(string name)
         {
             
             typingEffect("ChatBot: -->  Please enter your name ", Console.ForegroundColor = ConsoleColor.Blue);//Displays the message and makes the message blue
@@ -250,6 +231,24 @@ namespace POEPart1
                             message = "Amazing, I will make sure that i remember that you are interested in " + favouriteTopic;
                         }
 
+                        if (response.Contains("worried"))
+                        {
+                            feelingTopic = keyword;
+                            message = "Its okay to be worried about " + feelingTopic + " just know that it involes " + responses[random.Next(responses.Count)];                        
+                        }
+
+                        if (response.Contains("curious"))
+                        {
+                            feelingTopic = keyword;
+                            message = "Its okay to be curiouse about " + feelingTopic + " just know that it involes " + responses[random.Next(responses.Count)];
+                        }
+
+                        if (response.Contains("frustrated"))
+                        {
+                            feelingTopic = keyword;
+                            message = "Its okay to be frustrated about " + feelingTopic + " just know that it involes " + responses[random.Next(responses.Count)];
+                        }
+
                     }
 
                 }
@@ -266,7 +265,7 @@ namespace POEPart1
                     break;
                 }else if (!string.IsNullOrEmpty(favouriteTopic))
                 {
-                    typingEffect("As someone interested in " + favouriteTopic + " remember that " + topicResponses[favouriteTopic][random.Next(topicResponses[favouriteTopic].Count)], Console.ForegroundColor = ConsoleColor.Green);
+                    typingEffect("As someone interested in " + favouriteTopic + " remember that it involves " + topicResponses[favouriteTopic][random.Next(topicResponses[favouriteTopic].Count)], Console.ForegroundColor = ConsoleColor.Green);
 
                 }
                 else
