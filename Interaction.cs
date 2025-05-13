@@ -13,7 +13,7 @@ namespace POEPart1
         Dictionary<string, List<string>> topicResponses = new Dictionary<string, List<string>>();
 
         //The favourite topic
-        string favouriteTopic = "";
+        ArrayList favouriteTopic = new ArrayList();
         string feelingTopic = "";
 
         //The last topic
@@ -251,16 +251,26 @@ namespace POEPart1
                         //Storing the keyword of the last topic
                         lastTopic = keyword;
                         found = true;
-                        
+
+                        //For displaying the favourite topic
+                        foreach(string item in favouriteTopic)
+                        {
+                            if (response.Contains(item))
+                            {
+                                message = "As a person interested in " + item + " knowing that " + responses[random.Next(responses.Count())];
+                            }
+                        }
+
                         //making sure that it knows what the user likes
                         if (response.Contains("interested") || response.Contains("love") || response.Contains("like"))
                         {
-                            favouriteTopic = keyword;
-                            message = "Amazing, I will make sure that i remember that you are interested in " + favouriteTopic;
+                            
+                            message = "Amazing, I will make sure that i remember that you are interested in " + keyword;
+                            favouriteTopic.Add(keyword);
                         }
 
                         //If the user is worried about something
-                        if (response.Contains("worried") || response.Contains("worries"))
+                        if (response.Contains("worried") || response.Contains("worries") || response.Contains("worrying"))
                         {
                             feelingTopic = keyword;
                             message = "Its okay to be worried about " + feelingTopic + " just know that  " + responses[random.Next(responses.Count)];                        
@@ -274,7 +284,7 @@ namespace POEPart1
                         }
 
                         //When something frustrates the user
-                        if (response.Contains("frustrated") || response.Contains("frustrating"))
+                        if (response.Contains("frustrated") || response.Contains("frustrating") || response.Contains("frustrates"))
                         {
                             feelingTopic = keyword;
                             message = "Its okay to be frustrated about " + feelingTopic + " just know that " + responses[random.Next(responses.Count)];
@@ -296,10 +306,6 @@ namespace POEPart1
                     //When the user exits
                     typingEffect("Thank you for using our chatbot", Console.ForegroundColor = ConsoleColor.Green);
                     break;
-                }else if (!string.IsNullOrEmpty(favouriteTopic))
-                {
-                    typingEffect("As someone interested in " + favouriteTopic + " remember that it involves " + topicResponses[favouriteTopic][random.Next(topicResponses[favouriteTopic].Count)], Console.ForegroundColor = ConsoleColor.Green);
-
                 }
                 else
                 {
@@ -309,6 +315,8 @@ namespace POEPart1
             } while (true);  
 
         }
+
+        
          
         //Method for typing effect
         private void typingEffect(string message, ConsoleColor color, int speed = 25)
