@@ -44,3 +44,16 @@ Questions to Ask the Chatbot
 -	"What is privacy"
 -	"What is socia engineering"
 
+********************************************************************
+•	Added random responses whereby the user can ask the chat-bot to tell you more about the specific keyword, and gives random responses of the same keyword
+![image](https://github.com/user-attachments/assets/0722a6d6-47bb-4f82-98bd-d34e075cc877)
+
+********************************************************************
+•	Added a sentimental detection whereby the user tells the chat-bot how he or she is feeling, and will respond based on how the user is feeling
+![image](https://github.com/user-attachments/assets/4a458918-4dee-46a5-8140-7c6c0f3e7998)
+
+********************************************************************
+•	Also detects when the user is interested in a specific topic, and can remember that the user likes or is interested in a specific topic later on in the chat-bot. 
+![image](https://github.com/user-attachments/assets/c9e21b36-e2b1-49af-9a7e-5161aecdd17b)
+
+
